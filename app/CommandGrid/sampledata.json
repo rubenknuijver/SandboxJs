@@ -1,0 +1,17 @@
+[
+    { "key": 0, "name": "Fred", "hobby": "Roller Skating", "favoriteMusic": "Disco" },
+    { "key": 1, "name": "Helen", "hobby": "Rock Climbing", "favoriteMusic": "Alternative" },
+    { "key": 2, "name": "Glen", "hobby": "Traveling", "favoriteMusic": "Classical" },
+    { "key": 3, "name": "Fred", "hobby": "Roller Skating", "favoriteMusic": "Disco" },
+    { "key": 4, "name": "Helen", "hobby": "Rock Climbing", "favoriteMusic": "Alternative" },
+    { "key": 5, "name": "Glen", "hobby": "Traveling", "favoriteMusic": "Classical" },
+    { "key": 10, "name": "Fred", "hobby": "Roller Skating", "favoriteMusic": "Disco" },
+    { "key": 13, "name": "Helen", "hobby": "Rock Climbing", "favoriteMusic": "Alternative" },
+    { "key": 232, "name": "Glen", "hobby": "Traveling", "favoriteMusic": "Classical" },
+    { "key": 340, "name": "Fred", "hobby": "Roller Skating", "favoriteMusic": "Disco" },
+    { "key": 31, "name": "Helen", "hobby": "Rock Climbing", "favoriteMusic": "Alternative" },
+    { "key": 32, "name": "Glen", "hobby": "Traveling", "favoriteMusic": "Classical" },
+    { "key": 550, "name": "Fred", "hobby": "Roller Skating", "favoriteMusic": "Disco" },
+    { "key": 451, "name": "Helen", "hobby": "Rock Climbing", "favoriteMusic": "Alternative" },
+    { "key": 562, "name": "Glen", "hobby": "Traveling", "favoriteMusic": "Classical" }
+]

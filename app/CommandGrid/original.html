@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Prime :: Grid - Original Full HTML Version</title>
+</head>
+<body>
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a href="">Grid Sample</a>
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li><a href="#">Grid</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="container body-content">
+        <section class="panel panel-default" ng-controller="boringController as boring">
+            <div class="panel-heading">
+                <strong><span class="glyphicon glyphicon-th"></span> Boring table</strong><div class="panel-buttons" command-handler="boring.panelcommand">
+                    <button type="button" class="btn btn-setting" command="settings"><span></span></button>
+                    <button type="button" class="btn btn-minimize" command="minimize"><span></span></button>
+                    <button type="button" class="btn btn-close" command="close"><span></span></button>
+                </div>
+            </div>
+            <div ng-hide="settings.collapse">
+                <div class="panel-table-filters">
+                    <div class="filter-result-info">
+                        <h5>
+                            Showing {{boring.data.Result.length}}/{{boring.data.TotalRows}} entries
+                        </h5>
+                    </div>
+                    <div class="search-box">
+                        <input placeholder="Search..." type="text" ng-model="boring.searchText">
+                    </div>
+                </div>
+                <div class="panel-body">
+                    <table command-handler="boring.commandTrigger">
+                        <thead>
+                            <tr>
+                                <th style="width:10%">#</th>
+                                <th>Name</th>
+                                <th>Hobby</th>
+                                <th>Favorite Music</th>
+                                <th style="width:10%">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="item in data.Result | filter:boring.searchText">
+                                <td>{{item.key}}</td>
+                                <td>{{item.name}}</td>
+                                <td>{{item.hobby}}</td>
+                                <td>{{item.favoriteMusic}}</td>
+                                <td>
+                                    <button type="button" command="edit" command-args="{{item.key}}"><span class="glyphicon glyphicon-pencil"></span></button>
+                                    <button type="button" command="delete" command-args="{{item.key}}"><span class="glyphicon glyphicon-remove"></span></button>
+                                    <button type="button" command="history" command-args="{{item.key}}"><span class="glyphicon glyphicon-time"></span></button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <footer class="table-footer">
+                        <div class="page-num-info">
+                            <page-sizing page-size="pagination.pageSize" options="5,10,15,20" />
+                        </div>
+                        <div class="pagination-container">
+                            <ul class="pagination">
+                                <li class="disabled"><a href="#">«</a></li>
+                                <li class="active"><a href="#">1</a></li>
+                                <li><a href="#">2</a></li>
+                                <li><a href="#">3</a></li>
+                                <li><a href="#">4</a></li>
+                                <li><a href="#">5</a></li>
+                                <li><a href="#">»</a></li>
+                            </ul>
+                        </div>
+                    </footer>
+                </div>
+            </div>
+            <taco-modal title="Grid Settings" visible="settings.visible">
+                <form class="form-horizontal">
+                    <fieldset>
+                        <legend>Legend</legend>
+                        <div class="form-group">
+                            <label for="inputEmail" class="col-lg-2 control-label">Email</label>
+                            <div class="input-group">
+                                <span class="input-group-addon">€</span>
+                                <input class="form-control" id="inputEmail" placeholder="Email" type="text">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="inputPassword" class="col-lg-2 control-label">Password</label>
+                            <div class="col-lg-10">
+                                <input class="form-control" id="inputPassword" placeholder="Password" type="password">
+                                <div class="checkbox">
+                                    <label>
+                                        <input type="checkbox"> Checkbox
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="textArea" class="col-lg-2 control-label">Textarea</label>
+                            <div class="col-lg-10">
+                                <textarea class="form-control" rows="3" id="textArea"></textarea>
+                                <span class="help-block">A longer block of help text that breaks onto a new line and may extend beyond one line.</span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-lg-2 control-label">Radios</label>
+                            <div class="col-lg-10">
+                                <div class="radio">
+                                    <label>
+                                        <input name="optionsRadios" id="optionsRadios1" value="option1" checked="" type="radio">
+                                        Option one is this
+                                    </label>
+                                </div>
+                                <div class="radio">
+                                    <label>
+                                        <input name="optionsRadios" id="optionsRadios2" value="option2" type="radio">
+                                        Option two can be something else
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </fieldset>
+                </form>
+            </taco-modal>
+        </section>
+    </div>
+    <hr />
+    <footer>
+        <div class="container">
+            <div class="row">
+                <section class="col-lg-3"></section>
+                <section class="col-lg-3"></section>
+                <section class="col-lg-3"></section>
+                <section class="col-lg-3">
+                    <p>&copy; Prime</p>
+                </section>
+            </div>
+        </div>
+    </footer>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            angular.bootstrap(document, ['app']);
+        });
+    </script>
+
+    <script type="application/json" id="sampleData" src="sampledata.json">
+    </script>
+
+</body>
+</html>

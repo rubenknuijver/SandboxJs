@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Pr1m3 :: Game of Life</title>
+    <link href="css/life.css" rel="stylesheet" />
+</head>
+<body>
+    <h1>Game of Life</h1>
+    <button class="play">Next</button>
+    <input type="checkbox" id="autoplay" />
+    <label for="autoplay" class="button">Autoplay</label>
+
+    <table id="grid"></table>
+
+    <footer></footer>
+
+    <script src="js/life.js"></script>
+    <script>
+        function $(selector, container) {
+            return (container || document).querySelector(selector);
+        }
+
+        (function () {
+            var lifeView = new LifeView(document.getElementById('grid'), 24);
+
+            var buttons = {
+                next: $('button.play')
+            };
+
+            buttons.next.addEventListener('click', function (event) {
+                lifeView.next();
+            });
+
+            $('#autoplay').addEventListener('change', function () {
+                //buttons.next.textContent = this.checked ? 'Start' : 'Next'
+                buttons.next.disabled = this.checked;
+
+                lifeView.autoplay = this.checked;
+
+                if (this.checked) {
+                    lifeView.autoplay = this.checked;
+                    lifeView.next();
+                }
+                else {
+                    clearTimeout(lifeView.timer);
+                }
+
+            });
+        })();
+
+    </script>
+</body>
+</html>

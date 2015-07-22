@@ -1,0 +1,60 @@
+﻿<!DOCTYPE html>
+<html ng-app="">
+<head>
+    <!-- Pr1m3 -->
+    <title></title>
+    <script type="text/javascript">
+        //** https://github.com/angular/angular.js/blob/master/src/ng/parse.js
+
+        /// Constructor functions are the only functions that start with Uppercase
+        function Example(element, scope, id) {
+            this.id = id;
+            this.$element = element;
+            this.$scope = scope;
+        }
+        Example.prototype.run = function (work) {
+            work(this, [].slice.call(arguments, 1));
+        };
+        Example.prototype.print = function (e) {
+            if (e) e.textContent = 'Id = ' + this.id;
+        };
+    </script>
+</head>
+<body>
+
+    <pickle data-callback='print($element)'>just an example</pickle>
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.2.20/angular.js"></script>
+    <script type="text/javascript">
+        angular.element(document).ready(function () {
+
+            var elm = document.querySelector('pickle');
+
+            /* This is a Hack to get an Angular Scope from outside of Angular */
+            var scope = (function (element) {
+                var e = angular.element(element);
+                var i = e.injector();
+                var s = e.scope();
+                i.invoke(['$scope', '$parse', function ($scope, $parse) {
+                    $scope.$parse = $parse;
+                }], e, {
+                    $scope: s
+                });
+                return s;
+            })(elm);
+
+            // Important stuff
+            var obj = new Example(elm, scope, 10),
+                func = elm.dataset.callback;
+
+            if (func !== undefined) {
+                func = scope.$parse(func);
+            }
+            if (typeof func === 'function') {
+                obj.run(func, elm);
+            }
+        });
+    </script>
+</body>
+</html>

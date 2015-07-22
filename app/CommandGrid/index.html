@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Pr!m3 :: Command Driven Grid - Using AngularJS</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+</head>
+<body>
+
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a href="">Grid Angular</a>
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li><a href="#">Grid</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="container body-content">
+        <section class="panel panel-default" ng-controller="boringController as boring">
+            <div class="panel-heading">
+                <strong><span class="glyphicon glyphicon-th"></span> Boring table</strong><div class="panel-buttons" command-handler="boring.panelcommand">
+                    <button type="button" class="btn btn-setting" command="settings"><span></span></button>
+                    <button type="button" class="btn btn-minimize" command="minimize"><span></span></button>
+                    <button type="button" class="btn btn-close" command="close"><span></span></button>
+                </div>
+            </div>
+            <div ng-hide="settings.collapse">
+                <div class="panel-table-filters">
+                    <div class="filter-result-info">
+                        <h5>
+                            Showing {{pagination.page}}/{{boring.data.TotalRows}} entries
+                        </h5>
+                    </div>
+                    <div class="search-box">
+                        <input placeholder="Search..." type="text" ng-model="boring.searchText">
+                    </div>
+                </div>
+                <div class="panel-body">
+                    <prime-grid page-size="pagination.pageSize" datasource="data.Result" command-handler="boring.commandTrigger" header-handler="boring.headerClicked">
+                        <columns>
+                            <column key="key" style="width:auto"><input type="checkbox" name="rowckecked" command="checkall" /></column>
+                            <column key="key" title="#" hidden="hidden"></column>
+                            <column key="name" title="Name" sortable="true"></column>
+                            <column key="hobby" title="Hobby" sortable="true"></column>
+                            <column key="favoriteMusic" title="Favorite Music" sortable="true"></column>
+                            <column title="Actions" style="width:10%">
+                                <button type="button" command="edit" command-args="{{item.key}}"><span class="glyphicon glyphicon-pencil"></span></button>
+                                <button type="button" command="delete" command-args="{{item.key}}"><span class="glyphicon glyphicon-remove"></span></button>
+                                <button type="button" command="history" command-args="{{item.key}}"><span class="glyphicon glyphicon-time"></span></button>
+                            </column>
+                        </columns>
+                        <empty-grid>
+                            <h5 style="font-style:italic">No data to display..</h5>
+                        </empty-grid>
+                    </prime-grid>
+                    <footer class="table-footer">
+                        <div class="page-num-info">
+                            <page-sizing page-size="pagination.pageSize" options="5,10,15,20" />
+                        </div>
+                        <div class="pagination-container">
+                            <taco-pager paging-model="pagination" />
+                        </div>
+                    </footer>
+                </div>
+            </div>
+            <taco-modal title="Grid Settings" visible="settings.visible">
+                <form class="form-horizontal">
+                    <fieldset>
+                        <legend>Leave some comment</legend>
+                        <div class="form-group">
+                            <label for="inputEmail" class="col-lg-2 control-label">Email</label>
+                            <div class="col-lg-10">
+                                <input class="form-control" id="inputEmail" placeholder="Email" type="text">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="textArea" class="col-lg-2 control-label">Textarea</label>
+                            <div class="col-lg-10">
+                                <textarea class="form-control" rows="3" id="textArea"></textarea>
+                                <span class="help-block">A longer block of help text that breaks onto a new line and may extend beyond one line.</span>
+                            </div>
+                        </div>
+                    </fieldset>
+                </form>
+            </taco-modal>
+        </section>
+
+    </div>
+    <hr />
+    <footer>
+        <div class="container">
+            <div class="row">
+                <section class="col-lg-3"></section>
+                <section class="col-lg-3"></section>
+                <section class="col-lg-3"></section>
+                <section class="col-lg-3">
+                    <p>&copy; Prime</p>
+                </section>
+            </div>
+        </div>
+    </footer>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            angular.bootstrap(document, ['app']);
+        });
+    </script>
+
+    <script type="application/json" id="sampleData" src="sampledata.json">
+    </script>
+
+</body>
+</html>>

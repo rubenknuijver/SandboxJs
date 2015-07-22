@@ -1,0 +1,41 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <!-- Pr1m3 -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1" />
+    <title></title>
+    <script type="text/javascript">
+        /// Constructor functions are the only functions that start with Uppercase
+        function Example(id) {
+            this.id = id;
+        }
+        Example.prototype.run = function (work) {
+            work.apply(this, [].slice.call(arguments, 1));
+        };
+        Example.prototype.print = function (e) {
+            if (e) e.textContent = 'Id = ' + this.id;
+        };
+    </script>
+</head>
+<body>
+
+    <pickle data-callback='print'>just an example</pickle>
+
+    <script type="text/javascript">
+        // using_antipattern
+        (function() {
+            var elm = document.querySelector('pickle');
+            var func = elm.dataset.callback;
+            var obj = new Example(10);
+
+            if (func !== undefined) {
+                func = obj[func]; //<-- is an anti pattern and can't do anything but execute predetermined functions
+            }
+            if (typeof func === 'function') {
+                obj.run(func, elm);
+            }
+        })();
+
+    </script>
+</body>
+</html>
